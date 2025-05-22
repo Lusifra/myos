@@ -1,59 +1,27 @@
+mov bx, 40 
+
+cmp bx, 4
+jle label_a
+cmp bx, 40
+jl label_b
+mov al, 'C'
+jmp finish
+
+
+
+label_b:
+    mov al, 'B'
+    jmp finish ;Must jmp when code flows
+label_a:
+    mov al, 'A'
+    jmp finish
+
+finish:
+
 mov ah, 0x0e
-
-mov bp, 0x8000
-mov sp, bp
-
-push 'A'
-push 'B'
-push 'C'
-
-
-mov al, [0x7fff]
 int 0x10
-mov al, [0x7ffe]
-int 0x10
-mov al, [0x7ffd]
-int 0x10
-mov al, [0x7ffc]
-int 0x10
-mov al, [0x7ffb]
-int 0x10
-mov al, [0x7ffa]
-int 0x10
-
-
-pop bx
-mov al, bl
-int 0x10
-
-pop bx
-mov al, bl
-int 0x10
-
-
-pop bx
-mov al, bl
-int 0x10
-
-
-mov al, [0x7fff]
-int 0x10
-mov al, [0x7ffe]
-int 0x10
-mov al, [0x7ffd]
-int 0x10
-mov al, [0x7ffc]
-int 0x10
-mov al, [0x7ffb]
-int 0x10
-mov al, [0x7ffa]
-int 0x10
-
-
 
 jmp $
 
-
-times 508-($-$$) db 0
-dw 0x1199
+times 510-($-$$) db 0
 dw 0xaa55
