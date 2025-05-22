@@ -1,26 +1,59 @@
-[org 0x7c00]
 mov ah, 0x0e
 
-mov al, the_secret
+mov bp, 0x8000
+mov sp, bp
+
+push 'A'
+push 'B'
+push 'C'
+
+
+mov al, [0x7fff]
+int 0x10
+mov al, [0x7ffe]
+int 0x10
+mov al, [0x7ffd]
+int 0x10
+mov al, [0x7ffc]
+int 0x10
+mov al, [0x7ffb]
+int 0x10
+mov al, [0x7ffa]
 int 0x10
 
-mov al, [the_secret]
+
+pop bx
+mov al, bl
 int 0x10
 
-mov bx, the_secret
-;add bx, 0x7c00
-mov al, [bx]
-int 0x10
-
-mov al, [0x7c19]
+pop bx
+mov al, bl
 int 0x10
 
 
-jmp $ ; jump to current address = infinite loop
+pop bx
+mov al, bl
+int 0x10
 
-the_secret:
-    db "X"
 
-; padding and magic number
-times 510 - ($-$$) db 0
-dw 0xaa55 
+mov al, [0x7fff]
+int 0x10
+mov al, [0x7ffe]
+int 0x10
+mov al, [0x7ffd]
+int 0x10
+mov al, [0x7ffc]
+int 0x10
+mov al, [0x7ffb]
+int 0x10
+mov al, [0x7ffa]
+int 0x10
+
+
+
+jmp $
+
+
+times 508-($-$$) db 0
+dw 0x1199
+dw 0xaa55
