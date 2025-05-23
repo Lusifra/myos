@@ -1,6 +1,12 @@
 [org 0x7c00]
-
+    
+    ;mov dl, 0x00 ; qemu didn't set dl to 0 without -fda option so set manually here
     ;mov [BOOT_DRIVE], dl ;BIOS stores boot drive in dl
+    ;mov dx, 0x0000
+    ;call print_hex
+    
+
+
     mov bp, 0x8000 ;set stack address
     mov sp, bp
     
