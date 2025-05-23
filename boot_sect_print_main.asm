@@ -14,8 +14,8 @@ call print_hex
 
 jmp $
 
-%include "boot_sect_print_string.asm"
 %include "boot_sect_print_hex.asm"
+%include "boot_sect_print_string.asm"
 
 HELLO_MSG:
     db 'Hello, world!', 0
