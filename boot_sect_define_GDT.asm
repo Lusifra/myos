@@ -54,5 +54,5 @@ gdt_descriptor:
     dw gdt_end - gdt_start - 1  ;size of GDT
     dd gdt_start                ;start of GDT
 
-CODE_SEG equ gdt_code - gdt_start
-DATA_SEG equ gdt_data - gdt_start
+CODE_SEG equ gdt_code - gdt_start ; code segment descriptor offset
+DATA_SEG equ gdt_data - gdt_start ; data segment descriptor offset
