@@ -9,7 +9,10 @@ switch_to_pm:
     or eax, 0x1     ; set first bit to 1(control register)
     mov cr0, eax    ; set cr0
 
-    jmp CODE_SEG:init_pm    ; far jump(flush CPU pipeline) to our 32-bit code
+    jmp CODE_SEG:init_pm    ; far jump
+                            ; CPU load descriptor(in GDT, offset=CODE_SEG 0x08) to cs(code descriptor)
+                            ; refresh eip. set init_pm to eip (base 0x00000000 + init_pm)
+                            ; flush CPU pipeline to our 32-bit code
                             
 
 [bits 32]
