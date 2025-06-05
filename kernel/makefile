@@ -1,7 +1,7 @@
 CC = i386-elf-gcc
 LD = i386-elf-ld
 
-all: os-image
+all: os-image kernel.dis
 
 os-image: boot_sect.bin kernel.bin
 	cat $^ > $@
@@ -19,4 +19,10 @@ kernel_entry.o: kernel_entry.asm
 	nasm $< -f elf -o $@
 
 clean:
-	rm *.o *.bin os-image *.dis
+	rm *dis *.o *.bin os-image
+
+kernel.dis: kernel.bin
+	ndisasm -b 32 $< > $@
+
+run: os-image
+	qemu-system-x86_64 -fda $<
